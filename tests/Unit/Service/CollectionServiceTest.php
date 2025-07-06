@@ -27,15 +27,15 @@ class CollectionServiceTest extends AbstractCollectionTestCase
     {
         parent::setUp();
         $this->produceFactory = new ProduceFactory();
-        
+
         $this->fruitCollection = new FruitCollection($this->storage);
         $this->vegetableCollection = new VegetableCollection($this->storage);
-        
+
         $this->collectionResolver = new CollectionResolver([
             $this->fruitCollection,
             $this->vegetableCollection,
         ]);
-        
+
         $this->service = new CollectionService($this->collectionResolver, $this->produceFactory);
     }
 
@@ -43,19 +43,20 @@ class CollectionServiceTest extends AbstractCollectionTestCase
     {
         $produceInput = new ProduceInput(1, 'Apple', 150.0, 'g', 'fruit');
 
-        $result = $this->service->addToCollection($produceInput);
+        $this->service->addToCollection($produceInput);
 
-        $this->assertCount(1, $result);
-        $this->assertEquals('Apple', $result[0]['name']);
-        $this->assertEquals(150.0, $result[0]['quantity']);
-        $this->assertEquals('g', $result[0]['unit']);
+        $result = $this->service->getCollection(ProduceType::Fruit);
+
+        $this->assertEquals('Apple', $result['fruits'][0]['name'] ?? null);
+        $this->assertEquals(150.0, $result['fruits'][0]['quantity'] ?? null);
+        $this->assertEquals('g', $result['fruits'][0]['unit'] ?? null);
     }
 
     public function testRemoveFromCollection(): void
     {
         $fruitInput = new ProduceInput(1, 'Apple', 150.0, 'g', 'fruit');
         $vegetableInput = new ProduceInput(1, 'Carrot', 100.0, 'g', 'vegetable');
-        
+
         $this->service->addToCollection($fruitInput);
         $this->service->addToCollection($vegetableInput);
 
@@ -87,7 +88,7 @@ class CollectionServiceTest extends AbstractCollectionTestCase
     {
         $fruitInput = new ProduceInput(1, 'Apple', 150.0, 'g', 'fruit');
         $vegetableInput = new ProduceInput(2, 'Carrot', 100.0, 'g', 'vegetable');
-        
+
         $this->service->addToCollection($fruitInput);
         $this->service->addToCollection($vegetableInput);
 
@@ -119,4 +120,4 @@ class CollectionServiceTest extends AbstractCollectionTestCase
 
         $this->service->removeFromCollection(ProduceType::Fruit, 999);
     }
-} 
+}

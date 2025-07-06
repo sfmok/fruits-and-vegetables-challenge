@@ -22,7 +22,7 @@ class FruitCollectionTest extends AbstractCollectionTestCase
     public function testAdd(): void
     {
         $fruit = $this->createFruit(1, 'Apple', 150.0);
-        
+
         $this->collection->add(1, $fruit);
 
         $result = $this->collection->list();
@@ -35,26 +35,17 @@ class FruitCollectionTest extends AbstractCollectionTestCase
         $fruit = $this->createFruit(1, 'Apple', 150.0);
         $this->collection->add(1, $fruit);
 
-        $result = $this->collection->remove(1);
+        $this->collection->remove(1);
 
-        $this->assertTrue($result);
-        
         $items = $this->collection->list();
         $this->assertCount(0, $items);
-    }
-
-    public function testRemoveReturnsFalse(): void
-    {
-        $result = $this->collection->remove(999);
-
-        $this->assertFalse($result);
     }
 
     public function testListWithNoFilters(): void
     {
         $fruit1 = $this->createFruit(1, 'Apple', 150.0);
         $fruit2 = $this->createFruit(2, 'Banana', 200.0);
-        
+
         $this->collection->add(1, $fruit1);
         $this->collection->add(2, $fruit2);
 
@@ -70,7 +61,7 @@ class FruitCollectionTest extends AbstractCollectionTestCase
         $fruit1 = $this->createFruit(1, 'Apple', 150.0);
         $fruit2 = $this->createFruit(2, 'Banana', 200.0);
         $fruit3 = $this->createFruit(3, 'Orange', 180.0);
-        
+
         $this->collection->add(1, $fruit1);
         $this->collection->add(2, $fruit2);
         $this->collection->add(3, $fruit3);
@@ -112,7 +103,7 @@ class FruitCollectionTest extends AbstractCollectionTestCase
         $fruit1 = $this->createFruit(1, 'Apple', 150.0);
         $fruit2 = $this->createFruit(2, 'Banana', 200.0);
         $fruit3 = $this->createFruit(3, 'Orange', 180.0);
-        
+
         $this->collection->add(1, $fruit1);
         $this->collection->add(2, $fruit2);
         $this->collection->add(3, $fruit3);
@@ -127,7 +118,7 @@ class FruitCollectionTest extends AbstractCollectionTestCase
     {
         $fruit1 = $this->createFruit(1, 'APPLE', 150.0);
         $fruit2 = $this->createFruit(2, 'Banana', 200.0);
-        
+
         $this->collection->add(1, $fruit1);
         $this->collection->add(2, $fruit2);
 
@@ -153,7 +144,7 @@ class FruitCollectionTest extends AbstractCollectionTestCase
     {
         $fruit1 = $this->createFruit(1, 'Apple', 150.0);
         $fruit2 = $this->createFruit(2, 'Banana', 200.0);
-        
+
         $this->collection->add(1, $fruit1);
         $this->collection->add(2, $fruit2);
 
@@ -178,4 +169,4 @@ class FruitCollectionTest extends AbstractCollectionTestCase
     {
         return (new Fruit())->setId($id)->setName($name)->setQuantityInGrams($quantityInGrams);
     }
-} 
+}

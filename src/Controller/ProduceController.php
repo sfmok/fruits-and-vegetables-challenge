@@ -16,7 +16,7 @@ use App\Dto\ProduceFiltersInput;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Route('/api/produces')]
-class ProduceController
+final class ProduceController
 {
     public function __construct(private CollectionService $collectionService) {}
 

@@ -21,6 +21,7 @@ final class FileStorage implements StorageInterface
         }
     }
 
+    #[\Override]
     public function store(ProduceType $produceType, int $id, Produce $produce): void
     {
         $data = $this->loadData($produceType);
@@ -28,11 +29,13 @@ final class FileStorage implements StorageInterface
         $this->saveData($produceType, $data);
     }
 
+    #[\Override]
     public function findAll(ProduceType $produceType): array
     {
         return array_values($this->loadData($produceType));
     }
 
+    #[\Override]
     public function find(ProduceType $produceType, int $id): ?Produce
     {
         $data = $this->loadData($produceType);
@@ -40,6 +43,7 @@ final class FileStorage implements StorageInterface
         return $data[$id] ?? null;
     }
 
+    #[\Override]
     public function remove(ProduceType $produceType, int $id): bool
     {
         $data = $this->loadData($produceType);

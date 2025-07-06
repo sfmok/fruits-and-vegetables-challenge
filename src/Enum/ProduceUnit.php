@@ -13,7 +13,7 @@ enum ProduceUnit: string
     {
         return match($this) {
             self::Gram => $weight,
-            self::Kilogram => $weight * 1000,
+            self::Kilogram => $weight * 1000.0,
         };
     }
 
@@ -21,7 +21,7 @@ enum ProduceUnit: string
     {
         return match($this) {
             self::Gram => $weightInGrams,
-            self::Kilogram => $weightInGrams / 1000,
+            self::Kilogram => $weightInGrams / 1000.0,
         };
     }
 }
