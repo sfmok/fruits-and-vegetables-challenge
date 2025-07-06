@@ -4,4 +4,4 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-class Vegetable extends Produce {}
+final class Vegetable extends Produce {}

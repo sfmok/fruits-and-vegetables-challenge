@@ -14,27 +14,25 @@ final readonly class CollectionService
 {
     public function __construct(private CollectionResolver $collectionResolver, private ProduceFactory $produceFactory) {}
 
-    public function addToCollection(ProduceInput $produceDto): array
+    public function addToCollection(ProduceInput $produceDto): void
     {
         $produceType = ProduceType::from($produceDto->type);
 
         $collection = $this->resolveCollection($produceType);
 
         $produce = $this->produceFactory->createInstance($produceType, $produceDto->toArray());
-        
-        $collection->add($produce->getId(), $produce);
 
-        return $collection->list();
+        $collection->add($produce->getId(), $produce);
     }
 
     public function removeFromCollection(ProduceType $produceType, int $id): void
     {
         $collection = $this->resolveCollection($produceType);
-        
+
         if (! $collection->get($id)) {
             throw new ProduceNotFoundException($id);
         }
-        
+
         $collection->remove($id);
     }
 
@@ -55,13 +53,13 @@ final readonly class CollectionService
         return $data;
     }
 
+    /** @psalm-suppress PossiblyUnusedMethod */
     public function searchProduces(ProduceType $produceType, string $query, ProduceUnit $unit = ProduceUnit::Gram): array
     {
         $collection = $this->resolveCollection($produceType);
-        
+
         return $collection->search($query, $unit);
     }
-
 
     private function resolveCollection(ProduceType $produceType): CollectionInterface
     {

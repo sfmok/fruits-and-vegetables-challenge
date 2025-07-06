@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Dto\ProduceFiltersInput;
 
 #[Route('/api/vegetables')]
-class VegetableController
+final class VegetableController
 {
     public function __construct(private CollectionService $collectionService) {}
 
@@ -37,7 +37,7 @@ class VegetableController
     public function deleteVegetable(int $id): JsonResponse
     {
         $this->collectionService->removeFromCollection(ProduceType::Vegetable, $id);
-        
+
         return new JsonResponse([], JsonResponse::HTTP_NO_CONTENT);
     }
-} 
+}

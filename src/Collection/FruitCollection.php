@@ -12,21 +12,25 @@ final readonly class FruitCollection extends AbstractCollection
 {
     public function __construct(private StorageInterface $storage) {}
 
+    #[\Override]
     public function add(int $id, Produce $produce): void
     {
         $this->storage->store(ProduceType::Fruit, $id, $produce);
     }
 
-    public function remove(int $id): bool
+    #[\Override]
+    public function remove(int $id): void
     {
-        return $this->storage->remove(ProduceType::Fruit, $id);
+        $this->storage->remove(ProduceType::Fruit, $id);
     }
 
+    #[\Override]
     public function get(int $id): ?Produce
     {
         return $this->storage->find(ProduceType::Fruit, $id);
     }
 
+    #[\Override]
     public function list(array $filters = []): array
     {
         $fruits = $this->storage->findAll(ProduceType::Fruit);
@@ -38,6 +42,7 @@ final readonly class FruitCollection extends AbstractCollection
         return array_map(fn(Produce $fruit) => $fruit->toArray($unit), $filteredFruits);
     }
 
+    #[\Override]
     public function search(string $query, ProduceUnit $unit = ProduceUnit::Gram): array
     {
         $fruits = $this->storage->findAll(ProduceType::Fruit);
@@ -51,6 +56,7 @@ final readonly class FruitCollection extends AbstractCollection
         return array_map(fn(Produce $fruit) => $fruit->toArray($unit), $filteredFruits);
     }
 
+    #[\Override]
     public function supports(ProduceType $produceType): bool
     {
         return $produceType === ProduceType::Fruit;

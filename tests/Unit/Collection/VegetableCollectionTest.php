@@ -22,7 +22,7 @@ class VegetableCollectionTest extends AbstractCollectionTestCase
     public function testAdd(): void
     {
         $vegetable = $this->createVegetable(1, 'Carrot', 100.0);
-        
+
         $this->collection->add(1, $vegetable);
 
         $result = $this->collection->list();
@@ -35,26 +35,17 @@ class VegetableCollectionTest extends AbstractCollectionTestCase
         $vegetable = $this->createVegetable(1, 'Carrot', 100.0);
         $this->collection->add(1, $vegetable);
 
-        $result = $this->collection->remove(1);
+        $this->collection->remove(1);
 
-        $this->assertTrue($result);
-        
         $items = $this->collection->list();
         $this->assertCount(0, $items);
-    }
-
-    public function testRemoveReturnsFalse(): void
-    {
-        $result = $this->collection->remove(999);
-
-        $this->assertFalse($result);
     }
 
     public function testListWithNoFilters(): void
     {
         $vegetable1 = $this->createVegetable(1, 'Carrot', 100.0);
         $vegetable2 = $this->createVegetable(2, 'Broccoli', 150.0);
-        
+
         $this->collection->add(1, $vegetable1);
         $this->collection->add(2, $vegetable2);
 
@@ -70,7 +61,7 @@ class VegetableCollectionTest extends AbstractCollectionTestCase
         $vegetable1 = $this->createVegetable(1, 'Carrot', 100.0);
         $vegetable2 = $this->createVegetable(2, 'Broccoli', 150.0);
         $vegetable3 = $this->createVegetable(3, 'Spinach', 80.0);
-        
+
         $this->collection->add(1, $vegetable1);
         $this->collection->add(2, $vegetable2);
         $this->collection->add(3, $vegetable3);
@@ -112,7 +103,7 @@ class VegetableCollectionTest extends AbstractCollectionTestCase
         $vegetable1 = $this->createVegetable(1, 'Carrot', 100.0);
         $vegetable2 = $this->createVegetable(2, 'Broccoli', 150.0);
         $vegetable3 = $this->createVegetable(3, 'Spinach', 80.0);
-        
+
         $this->collection->add(1, $vegetable1);
         $this->collection->add(2, $vegetable2);
         $this->collection->add(3, $vegetable3);
@@ -127,7 +118,7 @@ class VegetableCollectionTest extends AbstractCollectionTestCase
     {
         $vegetable1 = $this->createVegetable(1, 'CARROT', 100.0);
         $vegetable2 = $this->createVegetable(2, 'Broccoli', 150.0);
-        
+
         $this->collection->add(1, $vegetable1);
         $this->collection->add(2, $vegetable2);
 
@@ -153,7 +144,7 @@ class VegetableCollectionTest extends AbstractCollectionTestCase
     {
         $vegetable1 = $this->createVegetable(1, 'Carrot', 100.0);
         $vegetable2 = $this->createVegetable(2, 'Broccoli', 150.0);
-        
+
         $this->collection->add(1, $vegetable1);
         $this->collection->add(2, $vegetable2);
 
@@ -178,4 +169,4 @@ class VegetableCollectionTest extends AbstractCollectionTestCase
     {
         return (new Vegetable())->setId($id)->setName($name)->setQuantityInGrams($quantityInGrams);
     }
-} 
+}
